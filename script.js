@@ -1,6 +1,6 @@
 const playButton = document.getElementById('play-button');
 const shareButton = document.getElementById('share-button');
-const keyChoicesContainer = document.getElementById('key-choices');
+const keyChoicesContainer = document.getElementById('key-choices-container');
 const feedback = document.getElementById('feedback');
 const scoreValue = document.getElementById('score-value');
 const correctCount = document.getElementById('correct-count');
@@ -59,21 +59,31 @@ function getRandomSong() {
 }
 
 function displayKeyChoices() {
-  const majorKeysContainer = document.getElementById('major-keys');
-  const minorKeysContainer = document.getElementById('minor-keys');
+  const majorKeysColumn = document.querySelector('#major-keys .keys-column');
+  const minorKeysColumn = document.querySelector('#minor-keys .keys-column');
 
-  majorKeysContainer.innerHTML = '<h3>Major Keys</h3>';
-  minorKeysContainer.innerHTML = '<h3>Minor Keys</h3>';
+  majorKeysColumn.innerHTML = '';
+  minorKeysColumn.innerHTML = '';
 
   displayKeys.forEach(({ major, minor }) => {
     const majorButton = createKeyButton(major, 'major');
     const minorButton = createKeyButton(minor, 'minor');
 
-    majorKeysContainer.appendChild(majorButton);
-    minorKeysContainer.appendChild(minorButton);
+    majorKeysColumn.appendChild(majorButton);
+    minorKeysColumn.appendChild(minorButton);
   });
 
   setButtonsAvailability(false);
+}
+
+function createKeyButton(key, type) {
+  const button = document.createElement('button');
+  const span = document.createElement('span');
+  span.textContent = key;
+  button.appendChild(span);
+  button.classList.add('key-button', `${type}-key`);
+  button.addEventListener('click', () => handleKeyChoice(key, type));
+  return button;
 }
 
 function createKeyButton(key, type) {
