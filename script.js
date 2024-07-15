@@ -15,18 +15,18 @@ let snippetPlayed = false;
 
 // Define display names and corresponding file names
 const displayKeys = [
-  { major: 'C', minor: 'Am' },
-  { major: 'Db', minor: 'Bbm' },
-  { major: 'D', minor: 'Bm' },
-  { major: 'Eb', minor: 'Cm' },
-  { major: 'E', minor: 'Dbm' },
-  { major: 'F', minor: 'Dm' },
-  { major: 'Gb', minor: 'Ebm' },
-  { major: 'G', minor: 'Em' },
-  { major: 'Ab', minor: 'Fm' },
-  { major: 'A', minor: 'Gbm' },
-  { major: 'Bb', minor: 'Gm' },
-  { major: 'B', minor: 'Abm' },
+  { major: 'C', minor: 'Cm' },
+  { major: 'Db', minor: 'Dbm' },
+  { major: 'D', minor: 'Dm' },
+  { major: 'Eb', minor: 'Ebm' },
+  { major: 'E', minor: 'Em' },
+  { major: 'F', minor: 'Fm' },
+  { major: 'Gb', minor: 'Gbm' },
+  { major: 'G', minor: 'Gm' },
+  { major: 'Ab', minor: 'Abm' },
+  { major: 'A', minor: 'Am' },
+  { major: 'Bb', minor: 'Bbm' },
+  { major: 'B', minor: 'Bm' },
 ];
 
 const originalSongs = ['Am', 'B', 'C', 'Cm']; // Add more songs as needed
@@ -59,25 +59,31 @@ function getRandomSong() {
 }
 
 function displayKeyChoices() {
-  keyChoicesContainer.innerHTML = '';
-  displayKeys.forEach(({ major, minor }) => {
-    const majorButton = document.createElement('button');
-    majorButton.textContent = major;
-    majorButton.classList.add('key-button');
-    majorButton.addEventListener('click', () =>
-      handleKeyChoice(major, 'major')
-    );
-    keyChoicesContainer.appendChild(majorButton);
+  const majorKeysContainer = document.getElementById('major-keys');
+  const minorKeysContainer = document.getElementById('minor-keys');
 
-    const minorButton = document.createElement('button');
-    minorButton.textContent = minor;
-    minorButton.classList.add('key-button');
-    minorButton.addEventListener('click', () =>
-      handleKeyChoice(minor, 'minor')
-    );
-    keyChoicesContainer.appendChild(minorButton);
+  majorKeysContainer.innerHTML = '<h3>Major Keys</h3>';
+  minorKeysContainer.innerHTML = '<h3>Minor Keys</h3>';
+
+  displayKeys.forEach(({ major, minor }) => {
+    const majorButton = createKeyButton(major, 'major');
+    const minorButton = createKeyButton(minor, 'minor');
+
+    majorKeysContainer.appendChild(majorButton);
+    minorKeysContainer.appendChild(minorButton);
   });
+
   setButtonsAvailability(false);
+}
+
+function createKeyButton(key, type) {
+  const button = document.createElement('button');
+  const span = document.createElement('span');
+  span.textContent = key;
+  button.appendChild(span);
+  button.classList.add('key-button', `${type}-key`);
+  button.addEventListener('click', () => handleKeyChoice(key, type));
+  return button;
 }
 
 function setButtonsAvailability(available) {
