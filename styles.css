@@ -67,29 +67,69 @@ h1 {
 }
 
 #key-choices {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   margin-top: 20px;
 }
 
+#major-keys,
+#minor-keys {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
 .key-button {
-  background-color: #2ecc71;
-  border: none;
-  color: white;
-  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+  padding: 2px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px; /* Reduced font size */
   cursor: pointer;
-  border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.1s ease;
+  width: 40px;
+  height: 120px;
+}
+
+.key-button span {
+  /* Remove vertical orientation styles */
+  transform: none;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
 }
 
 .key-button:hover {
-  background-color: #27ae60;
+  background-color: #f0f0f0;
   transform: scale(1.05);
+}
+
+.key-button.major-key {
+  background-color: #ffffff;
+}
+
+.key-button.minor-key {
+  background-color: #e0e0e0;
+}
+
+h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Adjust the layout for smaller screens */
+@media (max-width: 600px) {
+  .key-button {
+    padding: 10px 5px;
+    font-size: 12px;
+    width: 30px;
+    height: 90px;
+  }
 }
 
 #feedback {
