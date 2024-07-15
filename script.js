@@ -2,10 +2,15 @@ const playButton = document.getElementById('play-button');
 const keyChoicesContainer = document.getElementById('key-choices');
 const feedback = document.getElementById('feedback');
 const scoreValue = document.getElementById('score-value');
+const correctCount = document.getElementById('correct-count');
+const incorrectCount = document.getElementById('incorrect-count');
 
 let currentSong = null;
 let audio = null;
 let score = 0;
+let correct = 0;
+let incorrect = 0;
+let snippetPlayed = false;
 
 // Define display names and corresponding file names
 const displayKeys = [
@@ -23,7 +28,7 @@ const displayKeys = [
   { major: 'B', minor: 'Abm' },
 ];
 
-const originalSongs = ['Am', 'B']; //, 'C', 'Cm'];
+const originalSongs = ['Am', 'B']; // Add more songs as needed
 
 // Generate song variations
 const songs = originalSongs.flatMap((original) =>
@@ -58,15 +63,37 @@ function displayKeyChoices() {
     const majorButton = document.createElement('button');
     majorButton.textContent = major;
     majorButton.classList.add('key-button');
-    majorButton.addEventListener('click', () => checkAnswer(major, 'major'));
+    majorButton.addEventListener('click', () =>
+      handleKeyChoice(major, 'major')
+    );
     keyChoicesContainer.appendChild(majorButton);
 
     const minorButton = document.createElement('button');
     minorButton.textContent = minor;
     minorButton.classList.add('key-button');
-    minorButton.addEventListener('click', () => checkAnswer(minor, 'minor'));
+    minorButton.addEventListener('click', () =>
+      handleKeyChoice(minor, 'minor')
+    );
     keyChoicesContainer.appendChild(minorButton);
   });
+  setButtonsAvailability(false);
+}
+
+function setButtonsAvailability(available) {
+  const buttons = keyChoicesContainer.getElementsByTagName('button');
+  for (let button of buttons) {
+    button.disabled = !available;
+    button.style.opacity = available ? '1' : '0.5';
+  }
+}
+
+function handleKeyChoice(selectedKey, selectedType) {
+  if (!snippetPlayed) {
+    feedback.textContent = 'Please play the snippet first!';
+    feedback.style.color = 'orange';
+    return;
+  }
+  checkAnswer(selectedKey, selectedType);
 }
 
 function showFeedback(isCorrect) {
@@ -85,7 +112,14 @@ function checkAnswer(selectedKey, selectedType) {
 
   if (isCorrect) {
     score++;
+    correct++;
     scoreValue.textContent = score;
+    correctCount.textContent = correct;
+    correctCount.style.color = 'green';
+  } else {
+    incorrect++;
+    incorrectCount.textContent = incorrect;
+    incorrectCount.style.color = 'red';
   }
 
   setTimeout(() => {
@@ -97,15 +131,13 @@ function checkAnswer(selectedKey, selectedType) {
 function startNewRound() {
   currentSong = getRandomSong();
   playButton.textContent = 'Play Snippet';
+  snippetPlayed = false;
+  setButtonsAvailability(false);
   // Load the new audio file
   if (audio) {
     audio.pause();
   }
   audio = new Audio(currentSong.audioFile);
-  /*
-  console.log(
-    `Debug: Playing ${currentSong.originalSong} transposed to ${currentSong.key}`
-  ); // For debugging*/
 }
 
 playButton.addEventListener('click', () => {
@@ -113,7 +145,8 @@ playButton.addEventListener('click', () => {
     audio
       .play()
       .then(() => {
-        //console.log(`Debug: Playing ${currentSong.audioFile}`); // For debugging
+        snippetPlayed = true;
+        setButtonsAvailability(true);
       })
       .catch((error) => {
         console.error('Error playing audio:', error);
