@@ -1,4 +1,5 @@
 const playButton = document.getElementById('play-button');
+const shareButton = document.getElementById('share-button');
 const keyChoicesContainer = document.getElementById('key-choices');
 const feedback = document.getElementById('feedback');
 const scoreValue = document.getElementById('score-value');
@@ -28,7 +29,7 @@ const displayKeys = [
   { major: 'B', minor: 'Abm' },
 ];
 
-const originalSongs = ['Am', 'B']; // Add more songs as needed
+const originalSongs = ['Am', 'B', 'C', 'Cm']; // Add more songs as needed
 
 // Generate song variations
 const songs = originalSongs.flatMap((original) =>
@@ -163,6 +164,21 @@ playButton.addEventListener('click', () => {
   audio.addEventListener('canplaythrough', function () {
     console.log('Audio can play through.');
   });
+});
+
+// Share button functionality
+shareButton.addEventListener('click', () => {
+  const shareLink = `https://stefanus-ai-tech.github.io/PerfectPitchSong`;
+  navigator.clipboard
+    .writeText(
+      `My score is ${score}\nTrue ${correct}\nFalse ${incorrect}\nLet me know how you did on ${shareLink}`
+    )
+    .then(() => {
+      alert('Achievement link copied to clipboard!');
+    })
+    .catch((error) => {
+      console.error('Could not copy text: ', error);
+    });
 });
 
 // Initialize the quiz
