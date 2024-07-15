@@ -58,6 +58,8 @@ function getRandomSong() {
   return songs[Math.floor(Math.random() * songs.length)];
 }
 
+// ... (keep your existing variable declarations and functions)
+
 function displayKeyChoices() {
   const majorKeysColumn = document.querySelector('#major-keys .keys-column');
   const minorKeysColumn = document.querySelector('#minor-keys .keys-column');
@@ -78,13 +80,13 @@ function displayKeyChoices() {
 
 function createKeyButton(key, type) {
   const button = document.createElement('button');
-  const span = document.createElement('span');
-  span.textContent = key;
-  button.appendChild(span);
+  button.textContent = key;
   button.classList.add('key-button', `${type}-key`);
   button.addEventListener('click', () => handleKeyChoice(key, type));
   return button;
 }
+
+// ... (keep the rest of your existing code)
 
 function createKeyButton(key, type) {
   const button = document.createElement('button');
