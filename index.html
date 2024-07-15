@@ -13,20 +13,22 @@
       <h4>by stefanus-ai-tech</h4>
       <div id="quiz-container">
         <button id="play-button">Play Snippet</button>
-        <div id="key-choices">
-          <div id="major-keys"></div>
-          <div id="minor-keys"></div>
+        <div id="key-choices-container">
+          <div id="major-keys">
+            <h4>Major Keys</h4>
+            <div class="keys-column"></div>
+          </div>
+          <div id="minor-keys">
+            <h4>Minor Keys</h4>
+            <div class="keys-column"></div>
+          </div>
         </div>
-        <p id="feedback"></p>
-        <div class="score-container">
-          <span class="score-item"
-            >Correct: <span id="correct-count">0</span></span
-          >
-          <span class="score-item"
-            >Incorrect: <span id="incorrect-count">0</span></span
-          >
+        <div id="feedback"></div>
+        <div id="score-container">
+          <span>Correct: <span id="correct-count">0</span></span>
+          <span>Incorrect: <span id="incorrect-count">0</span></span>
+          <span>Score: <span id="score-value">0</span></span>
         </div>
-        <p id="score">Score: <span id="score-value">0</span></p>
         <button id="share-button">Share</button>
       </div>
     </div>
