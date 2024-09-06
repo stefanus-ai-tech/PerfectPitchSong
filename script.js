@@ -29,7 +29,7 @@ const displayKeys = [
   { major: 'B', minor: 'Bm' },
 ];
 
-const originalSongs = ['Am', 'B', 'Abm', 'Bbm', 'A', 'A2']; // Add more songs as needed
+const originalSongs = ['Am', 'B', 'Bbm', 'A', 'A2']; // Add more songs as needed
 
 // Generate song variations
 const songs = originalSongs.flatMap((original) =>
