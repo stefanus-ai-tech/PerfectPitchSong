@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif; /* Modern & Elegant font */
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -7,65 +7,56 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f4f8;
+  background: linear-gradient(
+    135deg,
+    #fdfbfb 0%,
+    #ebedee 100%
+  ); /* Subtle gradient background */
   color: #333;
 }
 
-/* Add this CSS to style the Share button */
-#share-button {
-  background-color: #e67e22;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-top: 20px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-#share-button:hover {
-  background-color: #d35400;
-}
-
 .container {
-  background-color: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  border-radius: 20px; /* Softer rounded corners */
+  padding: 30px 40px; /* More padding */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
   text-align: center;
-  max-width: 600px;
+  max-width: 500px; /* Adjusted max-width */
   width: 90%;
   position: relative;
-  padding-bottom: 70px; /* Make space for the Share button */
+  padding-bottom: 80px; /* Increased space for the Share button */
 }
 
 h1 {
   color: #2c3e50;
-  margin-bottom: 30px;
-  font-size: 2.5em;
+  margin-bottom: 25px; /* Adjusted margin */
+  font-size: 2.2em; /* Slightly smaller font size */
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 #play-button {
-  background-color: #3498db;
+  background-color: #67b26f; /* Updated color */
+  background-image: linear-gradient(315deg, #67b26f 0%, #4ca2cd 74%);
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 12px 28px; /* Adjusted padding */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 18px;
+  font-size: 17px; /* Slightly smaller font size */
   margin: 20px 0;
   cursor: pointer;
   border-radius: 50px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Button shadow */
 }
 
 #play-button:hover {
-  background-color: #2980b9;
+  background-image: linear-gradient(315deg, #4ca2cd 0%, #67b26f 74%);
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
 }
 
 #quiz-container {
@@ -79,37 +70,45 @@ h1 {
 
 #key-choices-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the columns */
+  gap: 20px; /* Space between columns */
   width: 100%;
-  max-width: 400px; /* Adjust this value as needed */
-  margin: 0 auto;
+  max-width: 500px; /* Adjusted max-width */
+  margin: 20px auto; /* Auto margin for centering */
 }
 
 #major-keys,
 #minor-keys {
-  width: 48%; /* Slightly less than 50% to account for spacing */
+  width: auto; /* Allow buttons to size to content */
+  flex-shrink: 0; /* Prevent shrinking */
 }
+
 .keys-column {
   display: flex;
   flex-direction: column;
+  gap: 10px; /* Space between buttons */
 }
 
 .key-button {
-  width: 100%;
-  padding: 10px 0;
-  margin-bottom: 5px;
+  padding: 8px 16px; /* Adjusted padding */
+  font-size: 0.9em; /* Slightly smaller font size */
   text-align: center;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: none;
+  background-color: #e7e7e7; /* Light grey */
   cursor: pointer;
+  border-radius: 25px; /* Rounded buttons */
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .key-button:hover {
-  background-color: #f0f0f0;
+  background-color: #ddd; /* Slightly darker on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
 }
 
 .key-button.minor-key {
-  background-color: #e0e0e0;
+  background-color: #d7d7d7; /* Slightly darker grey for minor keys */
 }
 
 #score-container {
@@ -120,10 +119,12 @@ h1 {
 }
 
 #share-button {
-  position: relative;
-  bottom: -10px;
-  right: 0px;
-  background-color: #e67e22;
+  position: absolute;
+  bottom: -50px; /* Positioned at the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center the button */
+  width: fit-content;
+  background-color: #ff7f50;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -132,46 +133,36 @@ h1 {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #share-button:hover {
-  background-color: #d35400;
-}
-
-@media (max-width: 300px) {
-  #key-choices-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #major-keys,
-  #minor-keys {
-    width: 50%;
-    max-width: 100px;
-    margin-bottom: 20px;
-  }
+  background-color: #ff6347;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #feedback {
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 17px;
   min-height: 27px;
+  color: #444;
 }
 
 #score {
   margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 19px;
+  font-weight: 600;
   color: #2c3e50;
 }
 
 .score-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin: 20px 0;
   font-size: 18px;
 }
 
@@ -183,10 +174,52 @@ h1 {
 
 #correct-count {
   color: #2ecc71;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 #incorrect-count {
   color: #e74c3c;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .container {
+    padding: 20px 25px; /* Less padding on smaller screens */
+    padding-bottom: 70px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  #key-choices-container {
+    flex-direction: column; /* Stack columns on small screens */
+    align-items: center;
+    gap: 10px;
+  }
+
+  #major-keys,
+  #minor-keys {
+    width: 100%; /* Full width on small screens */
+  }
+
+  .key-button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  #share-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 350px) {
+  #play-button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
 }
