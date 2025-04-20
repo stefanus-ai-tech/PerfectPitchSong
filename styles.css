@@ -73,43 +73,151 @@ h1 {
 }
 
 #key-comparison {
-  margin-top: 20px;
+  margin-top: 30px; /* Increased margin */
   text-align: center;
 }
 
-#key-choices-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 400px; /* Adjust this value as needed */
-  margin: 0 auto;
-}
-
-#major-keys,
-#minor-keys {
-  width: 48%; /* Slightly less than 50% to account for spacing */
-}
-.keys-column {
-  display: flex;
-  flex-direction: column;
+/* Styles for the Circle of Fifths */
+#circle-of-fifths-container {
+  position: relative;
+  width: 70vw; /* Responsive width */
+  max-width: 350px; /* Max size on larger screens */
+  height: 70vw; /* Keep it square */
+  max-height: 350px;
+  margin: 40px auto 20px; /* Center and add margin */
+  border-radius: 50%;
+  /* border: 2px solid #eee; */ /* Optional: visualize the circle */
+  display: flex; /* Needed for centering if buttons weren't absolute */
+  justify-content: center;
+  align-items: center;
 }
 
 .key-button {
-  width: 100%;
-  padding: 10px 0;
-  margin-bottom: 5px;
-  text-align: center;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  position: absolute; /* Positioned by JS */
+  /* Size will be set dynamically by JS based on container size */
+  /* width: 50px; */ /* Fixed size for buttons - REMOVED */
+  /* height: 50px; */ /* REMOVED */
+  padding: 0; /* Remove padding */
+  /* Margin will be set dynamically by JS */
+  /* margin: -25px 0 0 -25px; */ /* Center the button on its calculated (x, y) - REMOVED */
+  border-radius: 50%; /* Make buttons circular */
+  border: none; /* Remove default border */
+  background-color: #fde2e4; /* Default pastel color */
+  color: #555; /* Darker text for contrast */
+  /* Font size will be set dynamically by JS */
+  /* font-size: 14px; */ /* REMOVED */
+  font-weight: bold;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    box-shadow 0.2s ease, width 0.2s ease, height 0.2s ease, margin 0.2s ease,
+    font-size 0.2s ease; /* Added transitions for dynamic props */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Click animation */
+.key-button:active {
+  transform: scale(0.95); /* Slightly shrink on click */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .key-button:hover {
-  background-color: #f0f0f0;
+  transform: scale(1.1); /* Grow on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.key-button.minor-key {
-  background-color: #e0e0e0;
+/* Soft Pastel Palette - Assigning colors could be done in JS for more control based on position,
+   but let's use nth-child for a simple CSS approach for now.
+   We have 24 buttons (12 major, 12 minor). */
+.key-button.major-key:nth-of-type(12n + 1) {
+  background-color: #ffadad;
+} /* C */
+.key-button.minor-key:nth-of-type(12n + 2) {
+  background-color: #ffd6a5;
+} /* Am */
+.key-button.major-key:nth-of-type(12n + 3) {
+  background-color: #fdffb6;
+} /* G */
+.key-button.minor-key:nth-of-type(12n + 4) {
+  background-color: #caffbf;
+} /* Em */
+.key-button.major-key:nth-of-type(12n + 5) {
+  background-color: #9bf6ff;
+} /* D */
+.key-button.minor-key:nth-of-type(12n + 6) {
+  background-color: #a0c4ff;
+} /* Bm */
+.key-button.major-key:nth-of-type(12n + 7) {
+  background-color: #bdb2ff;
+} /* A */
+.key-button.minor-key:nth-of-type(12n + 8) {
+  background-color: #ffc6ff;
+} /* Gbm/F#m */
+.key-button.major-key:nth-of-type(12n + 9) {
+  background-color: #ffadad;
+} /* E */
+.key-button.minor-key:nth-of-type(12n + 10) {
+  background-color: #ffd6a5;
+} /* Dbm/C#m */
+.key-button.major-key:nth-of-type(12n + 11) {
+  background-color: #fdffb6;
+} /* B */
+.key-button.minor-key:nth-of-type(12n + 12) {
+  background-color: #caffbf;
+} /* Abm/G#m */
+.key-button.major-key:nth-of-type(12n + 13) {
+  background-color: #9bf6ff;
+} /* Gb/F# */
+.key-button.minor-key:nth-of-type(12n + 14) {
+  background-color: #a0c4ff;
+} /* Ebm/D#m */
+.key-button.major-key:nth-of-type(12n + 15) {
+  background-color: #bdb2ff;
+} /* Db */
+.key-button.minor-key:nth-of-type(12n + 16) {
+  background-color: #ffc6ff;
+} /* Bbm */
+.key-button.major-key:nth-of-type(12n + 17) {
+  background-color: #ffadad;
+} /* Ab */
+.key-button.minor-key:nth-of-type(12n + 18) {
+  background-color: #ffd6a5;
+} /* Fm */
+.key-button.major-key:nth-of-type(12n + 19) {
+  background-color: #fdffb6;
+} /* Eb */
+.key-button.minor-key:nth-of-type(12n + 20) {
+  background-color: #caffbf;
+} /* Cm */
+.key-button.major-key:nth-of-type(12n + 21) {
+  background-color: #9bf6ff;
+} /* Bb */
+.key-button.minor-key:nth-of-type(12n + 22) {
+  background-color: #a0c4ff;
+} /* Gm */
+.key-button.major-key:nth-of-type(12n + 23) {
+  background-color: #bdb2ff;
+} /* F */
+.key-button.minor-key:nth-of-type(12n + 24) {
+  background-color: #ffc6ff;
+} /* Dm */
+
+/* Style disabled buttons */
+.key-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: scale(1); /* Prevent scaling when disabled */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.key-button:disabled:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Keep shadow consistent on hover when disabled */
+}
+.key-button:disabled:active {
+  transform: scale(1); /* Prevent click animation when disabled */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #score-container {
@@ -140,17 +248,43 @@ h1 {
   background-color: #d35400;
 }
 
-@media (max-width: 300px) {
-  #key-choices-container {
-    flex-direction: column;
-    align-items: center;
+/* Media Queries for further adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    padding-bottom: 60px; /* Adjust for share button */
   }
+  h1 {
+    font-size: 2em;
+  }
+  #play-button {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+  #circle-of-fifths-container {
+    width: 85vw; /* Larger percentage on smaller screens */
+    height: 85vw;
+    max-width: 300px; /* Smaller max size */
+    max-height: 300px;
+    margin-top: 30px;
+  }
+}
 
-  #major-keys,
-  #minor-keys {
-    width: 50%;
-    max-width: 100px;
-    margin-bottom: 20px;
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.8em;
+  }
+  #circle-of-fifths-container {
+    width: 90vw;
+    height: 90vw;
+    max-width: 260px;
+    max-height: 260px;
+  }
+  #score-container {
+    font-size: 16px;
+  }
+  #feedback {
+    font-size: 16px;
   }
 }
 
