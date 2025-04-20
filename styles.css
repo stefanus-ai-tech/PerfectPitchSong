@@ -1,21 +1,55 @@
+/* Define Soft Warm Pastel Palette */
+:root {
+  --bg-color: #fff0f5; /* Lavender blush / very pale pink */
+  --container-bg: #ffffff;
+  --text-color: #5d5c61; /* Dark grey */
+  --heading-color: #735d78; /* Muted purple */
+  --play-button-bg: #a0c4ff; /* Pastel blue */
+  --play-button-hover: #8baff1;
+  --share-button-bg: #ffd6a5; /* Pastel orange/peach */
+  --share-button-hover: #ffc98f;
+  --key-button-major: #caffbf; /* Pastel green */
+  --key-button-minor: #ffadad; /* Pastel red/pink */
+  --key-button-hover-bg: #fdffb6; /* Pastel yellow */
+  --key-button-shadow: rgba(93, 92, 97, 0.2);
+  --correct-color: #588157; /* Muted green */
+  --incorrect-color: #e56b6f; /* Muted red */
+}
+
+@keyframes subtlePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 2px 4px var(--key-button-shadow);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 3px 6px var(--key-button-shadow);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 4px var(--key-button-shadow);
+  }
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   margin: 0;
-  padding: 0;
+  padding: 20px; /* Add some padding */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f4f8;
-  color: #333;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-sizing: border-box;
 }
 
 /* Add this CSS to style the Share button */
 #share-button {
-  background-color: #e67e22;
+  background-color: var(--share-button-bg);
   border: none;
-  color: white;
+  color: var(--text-color); /* Match text color */
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -24,35 +58,49 @@ body {
   margin-top: 20px;
   cursor: pointer;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #share-button:hover {
-  background-color: #d35400;
+  background-color: var(--share-button-hover);
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
 .container {
-  background-color: white;
-  border-radius: 12px;
+  background-color: var(--container-bg);
+  border-radius: 16px; /* Softer radius */
   padding: 30px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(115, 93, 120, 0.15); /* Softer shadow */
   text-align: center;
   max-width: 600px;
-  width: 90%;
+  width: 100%; /* Use full width up to max-width */
   position: relative;
   padding-bottom: 70px; /* Make space for the Share button */
+  box-sizing: border-box;
 }
 
 h1 {
-  color: #2c3e50;
-  margin-bottom: 30px;
-  font-size: 2.5em;
+  color: var(--heading-color);
+  margin-bottom: 10px; /* Reduced margin */
+  font-size: 2.2em; /* Slightly smaller */
+}
+
+h3 {
+  color: var(--text-color);
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+h4 {
+  color: var(--text-color);
+  font-weight: normal;
+  font-size: 0.9em;
+  margin-bottom: 25px;
 }
 
 #play-button {
-  background-color: #3498db;
+  background-color: var(--play-button-bg);
   border: none;
-  color: white;
+  color: var(--container-bg); /* White text */
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -61,11 +109,13 @@ h1 {
   margin: 20px 0;
   cursor: pointer;
   border-radius: 50px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(160, 196, 255, 0.3); /* Subtle shadow */
 }
 
 #play-button:hover {
-  background-color: #2980b9;
+  background-color: var(--play-button-hover);
+  transform: translateY(-2px); /* Slight lift */
 }
 
 #quiz-container {
@@ -73,7 +123,7 @@ h1 {
 }
 
 #key-comparison {
-  margin-top: 30px; /* Increased margin */
+  margin-top: 15px; /* Reduced margin */
   text-align: center;
 }
 
@@ -86,8 +136,8 @@ h1 {
   max-height: 350px;
   margin: 40px auto 20px; /* Center and add margin */
   border-radius: 50%;
-  /* border: 2px solid #eee; */ /* Optional: visualize the circle */
-  display: flex; /* Needed for centering if buttons weren't absolute */
+  /* border: 1px solid rgba(115, 93, 120, 0.1); */ /* Optional: very subtle border */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -102,164 +152,117 @@ h1 {
   /* margin: -25px 0 0 -25px; */ /* Center the button on its calculated (x, y) - REMOVED */
   border-radius: 50%; /* Make buttons circular */
   border: none; /* Remove default border */
-  background-color: #fde2e4; /* Default pastel color */
-  color: #555; /* Darker text for contrast */
+  /* background-color: #fde2e4; */ /* Default pastel color - REMOVED */
+  color: var(--text-color); /* Darker text for contrast */
   /* Font size will be set dynamically by JS */
   /* font-size: 14px; */ /* REMOVED */
-  font-weight: bold;
+  font-weight: 600; /* Slightly bolder */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  transition: transform 0.2s ease, background-color 0.2s ease,
-    box-shadow 0.2s ease, width 0.2s ease, height 0.2s ease, margin 0.2s ease,
-    font-size 0.2s ease; /* Added transitions for dynamic props */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, background-color 0.25s ease,
+    box-shadow 0.25s ease, width 0.2s ease, height 0.2s ease, margin 0.2s ease,
+    font-size 0.2s ease; /* Smoother transitions */
+  box-shadow: 0 2px 4px var(--key-button-shadow);
+  animation: subtlePulse 4s infinite ease-in-out; /* Apply subtle pulse */
+}
+
+/* Assign base colors */
+.key-button.major-key {
+  background-color: var(--key-button-major);
+}
+.key-button.minor-key {
+  background-color: var(--key-button-minor);
 }
 
 /* Click animation */
-.key-button:active {
+.key-button:active:not(:disabled) {
+  /* Only animate if not disabled */
   transform: scale(0.95); /* Slightly shrink on click */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px var(--key-button-shadow);
+  animation-play-state: paused; /* Pause pulse on click */
 }
 
-.key-button:hover {
+.key-button:hover:not(:disabled) {
+  /* Only animate if not disabled */
   transform: scale(1.1); /* Grow on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px var(--key-button-shadow);
+  background-color: var(--key-button-hover-bg); /* Change color on hover */
+  animation-play-state: paused; /* Pause pulse on hover */
 }
-
-/* Soft Pastel Palette - Assigning colors could be done in JS for more control based on position,
-   but let's use nth-child for a simple CSS approach for now.
-   We have 24 buttons (12 major, 12 minor). */
-.key-button.major-key:nth-of-type(12n + 1) {
-  background-color: #ffadad;
-} /* C */
-.key-button.minor-key:nth-of-type(12n + 2) {
-  background-color: #ffd6a5;
-} /* Am */
-.key-button.major-key:nth-of-type(12n + 3) {
-  background-color: #fdffb6;
-} /* G */
-.key-button.minor-key:nth-of-type(12n + 4) {
-  background-color: #caffbf;
-} /* Em */
-.key-button.major-key:nth-of-type(12n + 5) {
-  background-color: #9bf6ff;
-} /* D */
-.key-button.minor-key:nth-of-type(12n + 6) {
-  background-color: #a0c4ff;
-} /* Bm */
-.key-button.major-key:nth-of-type(12n + 7) {
-  background-color: #bdb2ff;
-} /* A */
-.key-button.minor-key:nth-of-type(12n + 8) {
-  background-color: #ffc6ff;
-} /* Gbm/F#m */
-.key-button.major-key:nth-of-type(12n + 9) {
-  background-color: #ffadad;
-} /* E */
-.key-button.minor-key:nth-of-type(12n + 10) {
-  background-color: #ffd6a5;
-} /* Dbm/C#m */
-.key-button.major-key:nth-of-type(12n + 11) {
-  background-color: #fdffb6;
-} /* B */
-.key-button.minor-key:nth-of-type(12n + 12) {
-  background-color: #caffbf;
-} /* Abm/G#m */
-.key-button.major-key:nth-of-type(12n + 13) {
-  background-color: #9bf6ff;
-} /* Gb/F# */
-.key-button.minor-key:nth-of-type(12n + 14) {
-  background-color: #a0c4ff;
-} /* Ebm/D#m */
-.key-button.major-key:nth-of-type(12n + 15) {
-  background-color: #bdb2ff;
-} /* Db */
-.key-button.minor-key:nth-of-type(12n + 16) {
-  background-color: #ffc6ff;
-} /* Bbm */
-.key-button.major-key:nth-of-type(12n + 17) {
-  background-color: #ffadad;
-} /* Ab */
-.key-button.minor-key:nth-of-type(12n + 18) {
-  background-color: #ffd6a5;
-} /* Fm */
-.key-button.major-key:nth-of-type(12n + 19) {
-  background-color: #fdffb6;
-} /* Eb */
-.key-button.minor-key:nth-of-type(12n + 20) {
-  background-color: #caffbf;
-} /* Cm */
-.key-button.major-key:nth-of-type(12n + 21) {
-  background-color: #9bf6ff;
-} /* Bb */
-.key-button.minor-key:nth-of-type(12n + 22) {
-  background-color: #a0c4ff;
-} /* Gm */
-.key-button.major-key:nth-of-type(12n + 23) {
-  background-color: #bdb2ff;
-} /* F */
-.key-button.minor-key:nth-of-type(12n + 24) {
-  background-color: #ffc6ff;
-} /* Dm */
+.key-button:not(:hover):not(:active) {
+  animation-play-state: running; /* Resume pulse when not hovered/active */
+}
 
 /* Style disabled buttons */
 .key-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4; /* More faded */
   cursor: not-allowed;
   transform: scale(1); /* Prevent scaling when disabled */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px var(--key-button-shadow);
+  animation: none; /* Disable pulse animation */
 }
 .key-button:disabled:hover {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Keep shadow consistent on hover when disabled */
+  /* Keep styles same as disabled state */
+  transform: scale(1);
+  box-shadow: 0 1px 2px var(--key-button-shadow);
+  background-color: inherit; /* Don't change color */
 }
 .key-button:disabled:active {
   transform: scale(1); /* Prevent click animation when disabled */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px var(--key-button-shadow);
 }
 
 #score-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 30px; /* More space above score */
+  font-size: 16px; /* Slightly smaller */
+  color: var(--text-color);
 }
 
+/* Reposition share button cleanly */
 #share-button {
-  position: relative;
-  bottom: -10px;
-  right: 0px;
-  background-color: #e67e22;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  /* Removed absolute positioning */
+  margin-top: 30px; /* Add space above */
+  /* background-color: #e67e22; */ /* Using variable now */
+  /* border: none; */
+  /* color: white; */ /* Using variable now */
+  /* padding: 10px 20px; */
+  /* text-align: center; */
+  /* text-decoration: none; */
+  /* display: inline-block; */
+  /* font-size: 16px; */
+  /* cursor: pointer; */
+  /* border-radius: 8px; */
+  /* transition: background-color 0.3s ease; */ /* Updated transition */
 }
 
-#share-button:hover {
-  background-color: #d35400;
-}
+/* #share-button:hover { */
+/* background-color: #d35400; */ /* Using variable now */
+/* } */
 
 /* Media Queries for further adjustments */
 @media (max-width: 600px) {
+  body {
+    padding: 10px; /* Less padding on small screens */
+  }
   .container {
     padding: 20px;
     padding-bottom: 60px; /* Adjust for share button */
   }
   h1 {
-    font-size: 2em;
+    font-size: 1.8em; /* Smaller heading */
   }
   #play-button {
     padding: 12px 25px;
     font-size: 16px;
+  }
+  #score-container span {
+    display: block; /* Stack score items vertically */
+    margin-bottom: 5px;
   }
   #circle-of-fifths-container {
     width: 85vw; /* Larger percentage on smaller screens */
@@ -272,7 +275,7 @@ h1 {
 
 @media (max-width: 400px) {
   h1 {
-    font-size: 1.8em;
+    font-size: 1.6em; /* Even smaller */
   }
   #circle-of-fifths-container {
     width: 90vw;
@@ -281,46 +284,39 @@ h1 {
     max-height: 260px;
   }
   #score-container {
-    font-size: 16px;
+    font-size: 14px; /* Smaller score text */
+  }
+  #score-container span {
+    margin-bottom: 3px;
   }
   #feedback {
-    font-size: 16px;
+    font-size: 14px; /* Smaller feedback text */
+    min-height: 20px;
+  }
+  #share-button {
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }
 
 #feedback {
   font-weight: bold;
-  margin-top: 20px;
-  font-size: 18px;
-  min-height: 27px;
+  margin-top: 25px; /* More space above feedback */
+  font-size: 16px; /* Slightly smaller */
+  min-height: 24px; /* Adjust height */
+  transition: color 0.3s ease; /* Animate color change */
 }
 
-#score {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-.score-container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.score-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* Removed redundant #score styles */
+/* Removed redundant .score-container styles */
+/* Removed redundant .score-item styles */
 
 #correct-count {
-  color: #2ecc71;
+  color: var(--correct-color);
   font-weight: bold;
 }
 
 #incorrect-count {
-  color: #e74c3c;
+  color: var(--incorrect-color);
   font-weight: bold;
 }
